@@ -1,5 +1,5 @@
 const Bluebird = require('bluebird')
-const sassRender = Bluebird.promisify(require('node-sass').render)
+const sassRender = Bluebird.promisify(require('sass').render)
 const path = require('path')
 const chalk = require('chalk')
 const url = require('url')
@@ -59,7 +59,8 @@ module.exports = async function compileBundle ({bundleName, variant}) {
   const nodeSassResult = await sassRender({
     file: sassFile,
     includePaths: includePaths,
-    outputStyle: SASS_STYLE,
+    // dart sass doesn't support nested, but it's not important enough to use it just for that
+    outputStyle: SASS_STYLE == 'nested' ? 'expanded' : SASS_STYLE,
     sourceComments: SASS_STYLE !== 'compressed',
     sourceMap: false
   })
