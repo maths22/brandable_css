@@ -1,5 +1,4 @@
-const Bluebird = require('bluebird')
-const sassRender = Bluebird.promisify(require('sass').render)
+const sass = require('sass')
 const path = require('path')
 const chalk = require('chalk')
 const url = require('url')
@@ -56,7 +55,7 @@ module.exports = async function compileBundle ({bundleName, variant}) {
   }
 
   const startTime = new Date()
-  const nodeSassResult = await sassRender({
+  const nodeSassResult = sass.renderSync({
     file: sassFile,
     includePaths: includePaths,
     // dart sass doesn't support nested, but it's not important enough to use it just for that
