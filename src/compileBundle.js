@@ -59,7 +59,7 @@ module.exports = async function compileBundle ({bundleName, variant}) {
     file: sassFile,
     includePaths: includePaths,
     // dart sass doesn't support nested, but it's not important enough to use it just for that
-    outputStyle: SASS_STYLE == 'nested' ? 'expanded' : SASS_STYLE,
+    outputStyle: SASS_STYLE === 'nested' ? 'expanded' : SASS_STYLE,
     sourceComments: SASS_STYLE !== 'compressed',
     sourceMap: false
   })
